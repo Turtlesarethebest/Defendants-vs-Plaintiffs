@@ -30,9 +30,11 @@
         .button-container {
             margin-top: 20px;
         }
-        .judge {
+        .judge, .party {
             margin-top: 20px;
-            font-weight: bold;
+        }
+        .name-input {
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -42,7 +44,32 @@
         <p>Plaintiffs will put in a case. Whoever loses has to pay $100-$10,000 (judge chooses the amount of money). If they don’t pay, they go to jail. Each person has a lawyer. Defendants try to confirm that they are not guilty. The game needs a judge.</p>
         
         <div class="judge">
-            Judge: <span id="judge-name">Honorable Judge John Doe</span>
+            <label for="judge-name">Judge: </label>
+            <input type="text" id="judge-name" class="name-input" placeholder="Enter Judge's Name">
+        </div>
+
+        <div class="party">
+            <h3>Plaintiffs</h3>
+            <div>
+                <label for="plaintiff-name">Plaintiff: </label>
+                <input type="text" id="plaintiff-name" class="name-input" placeholder="Enter Plaintiff's Name">
+            </div>
+            <div>
+                <label for="plaintiff-lawyer">Plaintiff's Lawyer: </label>
+                <input type="text" id="plaintiff-lawyer" class="name-input" placeholder="Enter Plaintiff's Lawyer's Name">
+            </div>
+        </div>
+
+        <div class="party">
+            <h3>Defendants</h3>
+            <div>
+                <label for="defendant-name">Defendant: </label>
+                <input type="text" id="defendant-name" class="name-input" placeholder="Enter Defendant's Name">
+            </div>
+            <div>
+                <label for="defendant-lawyer">Defendant's Lawyer: </label>
+                <input type="text" id="defendant-lawyer" class="name-input" placeholder="Enter Defendant's Lawyer's Name">
+            </div>
         </div>
 
         <div class="button-container">
