@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Defendants vs Plaintiffs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .courtroom {
+            text-align: center;
+        }
+        .jury {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .jury-member {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .judge {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="courtroom">
+        <h1>Defendants vs Plaintiffs</h1>
+        <p>Plaintiffs will put in a case. Whoever loses has to pay $100-$10,000 (judge chooses the amount of money). If they don’t pay, they go to jail. Each person has a lawyer. Defendants try to confirm that they are not guilty. The game needs a judge.</p>
+        
+        <div class="judge">
+            Judge: <span id="judge-name">Honorable Judge John Doe</span>
+        </div>
+
+        <div class="button-container">
+            <button onclick="declareVerdict('guilty')">Guilty</button>
+            <button onclick="declareVerdict('not guilty')">Not Guilty</button>
+        </div>
+        <div id="verdict"></div>
+        <div class="jury">
+            <div class="jury-member">1</div>
+            <div class="jury-member">2</div>
+            <div class="jury-member">3</div>
+            <div class="jury-member">4</div>
+            <div class="jury-member">5</div>
+            <div class="jury-member">6</div>
+            <div class="jury-member">7</div>
+            <div class="jury-member">8</div>
+            <div class="jury-member">9</div>
+            <div class="jury-member">10</div>
+            <div class="jury-member">11</div>
+            <div class="jury-member">12</div>
+        </div>
+    </div>
+
+    <script>
+        function declareVerdict(verdict) {
+            let result = "";
+            if (verdict === 'guilty') {
+                result = "The Plaintiffs win. The Defendants must pay the chosen amount or go to jail.";
+            } else if (verdict === 'not guilty') {
+                result = "The Defendants win. They are not guilty.";
+            }
+            document.getElementById('verdict').innerText = result;
+        }
+    </script>
+</body>
+</html>
