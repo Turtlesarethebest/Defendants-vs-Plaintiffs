@@ -14,15 +14,17 @@
         }
         .jury {
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 20px;
         }
         .jury-member {
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 120px;
             border: 1px solid #000;
-            border-radius: 50%;
+            border-radius: 8px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             margin: 5px;
@@ -33,8 +35,20 @@
         .judge, .party {
             margin-top: 20px;
         }
-        .name-input {
+        .name-input, .chat-input {
             margin-bottom: 10px;
+        }
+        .chat {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .chat-box {
+            width: 100%;
+            height: 150px;
+            border: 1px solid #ccc;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+            padding: 10px;
         }
     </style>
 </head>
@@ -78,22 +92,102 @@
         </div>
         <div id="verdict"></div>
         <div class="jury">
-            <div class="jury-member">1</div>
-            <div class="jury-member">2</div>
-            <div class="jury-member">3</div>
-            <div class="jury-member">4</div>
-            <div class="jury-member">5</div>
-            <div class="jury-member">6</div>
-            <div class="jury-member">7</div>
-            <div class="jury-member">8</div>
-            <div class="jury-member">9</div>
-            <div class="jury-member">10</div>
-            <div class="jury-member">11</div>
-            <div class="jury-member">12</div>
+            <div class="jury-member">
+                <span>Jury 1</span>
+                <button onclick="vote(1, 'guilty')">Guilty</button>
+                <button onclick="vote(1, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 2</span>
+                <button onclick="vote(2, 'guilty')">Guilty</button>
+                <button onclick="vote(2, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 3</span>
+                <button onclick="vote(3, 'guilty')">Guilty</button>
+                <button onclick="vote(3, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 4</span>
+                <button onclick="vote(4, 'guilty')">Guilty</button>
+                <button onclick="vote(4, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 5</span>
+                <button onclick="vote(5, 'guilty')">Guilty</button>
+                <button onclick="vote(5, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 6</span>
+                <button onclick="vote(6, 'guilty')">Guilty</button>
+                <button onclick="vote(6, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 7</span>
+                <button onclick="vote(7, 'guilty')">Guilty</button>
+                <button onclick="vote(7, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 8</span>
+                <button onclick="vote(8, 'guilty')">Guilty</button>
+                <button onclick="vote(8, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 9</span>
+                <button onclick="vote(9, 'guilty')">Guilty</button>
+                <button onclick="vote(9, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 10</span>
+                <button onclick="vote(10, 'guilty')">Guilty</button>
+                <button onclick="vote(10, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 11</span>
+                <button onclick="vote(11, 'guilty')">Guilty</button>
+                <button onclick="vote(11, 'not guilty')">Not Guilty</button>
+            </div>
+            <div class="jury-member">
+                <span>Jury 12</span>
+                <button onclick="vote(12, 'guilty')">Guilty</button>
+                <button onclick="vote(12, 'not guilty')">Not Guilty</button>
+            </div>
+        </div>
+        
+        <div class="chat">
+            <h3>Chat</h3>
+            <div class="chat-box" id="chat-box"></div>
+            <input type="text" id="chat-name" class="chat-input" placeholder="Enter Jury Number or Name">
+            <input type="text" id="chat-message" class="chat-input" placeholder="Enter Message">
+            <button onclick="sendMessage()">Send</button>
         </div>
     </div>
 
     <script>
+        let votes = {
+            guilty: 0,
+            notGuilty: 0
+        };
+
+        function vote(juryNumber, verdict) {
+            if (verdict === 'guilty') {
+                votes.guilty++;
+            } else if (verdict === 'not guilty') {
+                votes.notGuilty++;
+            }
+            updateVerdict();
+        }
+
+        function updateVerdict() {
+            if (votes.guilty > votes.notGuilty) {
+                document.getElementById('verdict').innerText = "Current Jury Verdict: Guilty";
+            } else if (votes.notGuilty > votes.guilty) {
+                document.getElementById('verdict').innerText = "Current Jury Verdict: Not Guilty";
+            } else {
+                document.getElementById('verdict').innerText = "Current Jury Verdict: Undecided";
+            }
+        }
+
         function declareVerdict(verdict) {
             let result = "";
             if (verdict === 'guilty') {
@@ -102,6 +196,22 @@
                 result = "The Defendants win. They are not guilty.";
             }
             document.getElementById('verdict').innerText = result;
+        }
+
+        function sendMessage() {
+            const name = document.getElementById('chat-name').value;
+            const message = document.getElementById('chat-message').value;
+            const chatBox = document.getElementById('chat-box');
+
+            if (name && message) {
+                const chatMessage = document.createElement('div');
+                chatMessage.innerHTML = `<strong>${name}:</strong> ${message}`;
+                chatBox.appendChild(chatMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                document.getElementById('chat-name').value = '';
+                document.getElementById('chat-message').value = '';
+            }
         }
     </script>
 </body>
